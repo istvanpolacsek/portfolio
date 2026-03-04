@@ -1,0 +1,14 @@
+# Library root
+node_modules
+
+# IDE and build system files
+.nx
+.idea
+.yarn
+
+# Build outputs
+apps/*/dist
+
+# Environment files
+.env.development
+.env.production

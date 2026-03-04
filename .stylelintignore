@@ -1,0 +1,22 @@
+# Library root
+node_modules
+
+# IDE and build system files
+.nx
+.idea
+.yarn
+
+# Build outputs
+apps/*/dist
+
+# Environment files
+.env.development
+.env.production
+
+# Files that don't contain CSS-in-JS
+*.json
+*.md
+*.html
+*.css
+*.scss
+*.sass
