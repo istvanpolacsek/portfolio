@@ -12,17 +12,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          fetch-depth: 0
 
       - name: Enable Corepack
         run: corepack enable
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable --network-timeout 100000
 
       - name: Update browserslist database
         run: yarn dlx update-browserslist-db@latest
