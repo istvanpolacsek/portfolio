@@ -1,0 +1,29 @@
+# JetBrains IDEs
+.idea
+
+# Nx files
+.nx/cache
+.nx/workspace-data
+
+# Yarn files
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Yarn cache and state
+.yarn/cache
+.yarn/install-state.gz
+.pnp.*
+
+# Dependencies
+node_modules
+
+# Yarn error logs
+yarn-error.log
+yarn-debug.log*
+
+# Environment variables
+.env*
