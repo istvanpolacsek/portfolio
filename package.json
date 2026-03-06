@@ -13,7 +13,6 @@
     "@nx/storybook": "22.5.2",
     "@nx/web": "22.5.2",
     "@storybook/nextjs": "10.2.15",
-    "@stylelint/postcss-css-in-js": "0.38.0",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.18",
     "@swc/helpers": "0.5.19",
@@ -26,9 +25,6 @@
     "nx": "22.5.2",
     "prettier": "3.8.1",
     "storybook": "10.2.15",
-    "stylelint": "17.4.0",
-    "stylelint-config-prettier": "9.0.5",
-    "stylelint-config-standard": "40.0.0",
     "ts-node": "10.9.1",
     "tslib": "2.3.1",
     "typescript": "5.9.3",
@@ -50,8 +46,7 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write",
-      "stylelint --fix"
+      "prettier --write"
     ],
     "**/*.{json,md,yml,yaml}": [
       "prettier --write"
