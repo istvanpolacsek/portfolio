@@ -30,7 +30,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.2, @babel/core@npm:^7.28.0, @babel/core@npm:^7.28.5":
+"@babel/core@npm:^7.17.9, @babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.2, @babel/core@npm:^7.28.0, @babel/core@npm:^7.28.5":
   version: 7.29.0
   resolution: "@babel/core@npm:7.29.0"
   dependencies:
@@ -267,7 +267,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.26.2, @babel/parser@npm:^7.28.6, @babel/parser@npm:^7.29.0, @babel/parser@npm:^7.8.3":
+"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.26.2, @babel/parser@npm:^7.28.6, @babel/parser@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/parser@npm:7.29.0"
   dependencies:
@@ -1282,7 +1282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.18.9, @babel/traverse@npm:^7.25.9, @babel/traverse@npm:^7.27.1, @babel/traverse@npm:^7.28.0, @babel/traverse@npm:^7.28.5, @babel/traverse@npm:^7.28.6, @babel/traverse@npm:^7.29.0, @babel/traverse@npm:^7.8.3":
+"@babel/traverse@npm:^7.16.0, @babel/traverse@npm:^7.18.9, @babel/traverse@npm:^7.25.9, @babel/traverse@npm:^7.27.1, @babel/traverse@npm:^7.28.0, @babel/traverse@npm:^7.28.5, @babel/traverse@npm:^7.28.6, @babel/traverse@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/traverse@npm:7.29.0"
   dependencies:
@@ -4767,6 +4767,18 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/09fc7636e28d2392518adbef71f5d556f247e99a0102e9d8916990be44e5a987e03a52c085f3d0006bbad56172344cb9ad8fb3b0bd9de7abf378eb4d341af4a3
+  languageName: node
+  linkType: hard
+
+"@stylelint/postcss-css-in-js@npm:0.38.0":
+  version: 0.38.0
+  resolution: "@stylelint/postcss-css-in-js@npm:0.38.0"
+  dependencies:
+    "@babel/core": "npm:^7.17.9"
+  peerDependencies:
+    postcss: ">=7.0.0"
+    postcss-syntax: ">=0.36.2"
+  checksum: 10c0/74f2fdf177b50b4fbfaa4aa78c3916e2bc3a1e07a23f931ff7b4cf059de9458986f1e24df49f1f8ec61132ed74f09bed0a4e5d25b221cf6e2b9c45fccd76c510
   languageName: node
   linkType: hard
 
@@ -12479,13 +12491,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "picocolors@npm:0.2.1"
-  checksum: 10c0/98a83c77912c80aea0fc518aec184768501bfceafa490714b0f43eda9c52e372b844ce0a591e822bbfe5df16dcf366be7cbdb9534d39cf54a80796340371ee17
-  languageName: node
-  linkType: hard
-
 "picocolors@npm:^1.0.0, picocolors@npm:^1.1.0, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
@@ -12592,6 +12597,7 @@ __metadata:
     "@nx/storybook": "npm:22.5.2"
     "@nx/web": "npm:22.5.2"
     "@storybook/nextjs": "npm:10.2.15"
+    "@stylelint/postcss-css-in-js": "npm:0.38.0"
     "@swc-node/register": "npm:1.11.1"
     "@swc/core": "npm:1.15.18"
     "@swc/helpers": "npm:0.5.19"
@@ -12610,8 +12616,6 @@ __metadata:
     stylelint: "npm:17.4.0"
     stylelint-config-prettier: "npm:9.0.5"
     stylelint-config-standard: "npm:40.0.0"
-    stylelint-config-styled-components: "npm:0.1.1"
-    stylelint-processor-styled-components: "npm:1.10.0"
     ts-node: "npm:10.9.1"
     tslib: "npm:2.3.1"
     typescript: "npm:5.9.3"
@@ -13083,16 +13087,6 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
   checksum: 10c0/748b82e6e5fc34034dcf2ae88ea3d11fd09f69b6c50ecdd3b4a875cfc7cdca435c958b211e2cb52355422ab6fccb7d8f2f2923161d7a1b281029e4a913d59acf
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^7.0.26":
-  version: 7.0.39
-  resolution: "postcss@npm:7.0.39"
-  dependencies:
-    picocolors: "npm:^0.2.1"
-    source-map: "npm:^0.6.1"
-  checksum: 10c0/fd27ee808c0d02407582cccfad4729033e2b439d56cd45534fb39aaad308bb35a290f3b7db5f2394980e8756f9381b458a625618550808c5ff01a125f51efc53
   languageName: node
   linkType: hard
 
@@ -15013,25 +15007,6 @@ __metadata:
   peerDependencies:
     stylelint: ^17.0.0
   checksum: 10c0/d8942552d53a3afda59b64d0c49503bb626fe5cef39a9e8c9583fcd60869f21431125ef4480ff27a59f7f2cf0da8af810d377129ef1d670ddc5def4defe2880c
-  languageName: node
-  linkType: hard
-
-"stylelint-config-styled-components@npm:0.1.1":
-  version: 0.1.1
-  resolution: "stylelint-config-styled-components@npm:0.1.1"
-  checksum: 10c0/0406e22c917bab691debdc50cd2f6f2d34b651b907365845639ea4b14532530bd3499abd90dded454fb8da2cb04ac231936a3fa89701d3444af09568e0aa4819
-  languageName: node
-  linkType: hard
-
-"stylelint-processor-styled-components@npm:1.10.0":
-  version: 1.10.0
-  resolution: "stylelint-processor-styled-components@npm:1.10.0"
-  dependencies:
-    "@babel/parser": "npm:^7.8.3"
-    "@babel/traverse": "npm:^7.8.3"
-    micromatch: "npm:^4.0.2"
-    postcss: "npm:^7.0.26"
-  checksum: 10c0/a331f9de5d7c4a041084a82e49fe578d249189c8c82edb2df43712a330245c263a50dc05384a35ddb7c9c4b62ae100695ce974fad8981f1ad37d637a8c5eb568
   languageName: node
   linkType: hard
 
