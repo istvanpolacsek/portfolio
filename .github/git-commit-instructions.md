@@ -5,12 +5,19 @@
 This project uses **Conventional Commits** enforced by commitlint. All commit messages must follow this format:
 
 ```
-<type>[optional scope]: <description>
+<type>(scope): <description>
 
-[optional body]
+<body>
 
 [optional footer(s)]
 ```
+
+**Required Components:**
+
+- **Type**: Must be one of the defined commit types
+- **Scope**: Must specify the area of change (cannot be omitted)
+- **Body**: Must be a single, simple sentence explaining the change
+- **Footer**: Optional for GitHub issue references and other metadata
 
 ## Commit Types
 
@@ -33,7 +40,7 @@ This project uses **Conventional Commits** enforced by commitlint. All commit me
 
 ## Scope Guidelines
 
-Use scopes to indicate the area of change:
+**Required**: Every commit must include a scope to indicate the area of change:
 
 - **app**: Changes to the main application
 - **lib**: Changes to shared libraries
@@ -41,22 +48,116 @@ Use scopes to indicate the area of change:
 - **api**: API-related changes
 - **config**: Configuration changes
 - **deps**: Dependency updates
+- **auth**: Authentication and authorization
+- **db**: Database-related changes
+- **tests**: Test-related changes
+- **docs**: Documentation-specific scope
+
+## Branch Naming Convention
+
+Use the following branch naming pattern for automatic GitHub issue referencing:
+
+```
+<type>/<issue-number>/<description>
+```
+
+**Important**: When your branch starts with one of the primary commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`), your commit messages **must** use the same type to maintain consistency.
+
+### Examples
+
+- `feat/123/user-authentication` → Commits must use `feat:` type
+- `fix/456/login-validation` → Commits must use `fix:` type
+- `chore/1/storybook` → Commits must use `chore:` type
+- `docs/789/api-documentation` → Commits must use `docs:` type
+
+When working on a branch following this convention, include the issue number in your commit footer:
+
+```
+Refs: #123
+```
 
 ## Examples
 
 ### Good Commit Messages
 
 ```bash
-feat: add user authentication system
+feat(auth): add user authentication system
+
+This implements JWT-based authentication with login and logout functionality.
+
+Refs: #123
+```
+
+```bash
 feat(ui): implement responsive navigation component
+
+The navigation now adapts to different screen sizes using CSS Grid.
+
+Refs: #456
+```
+
+```bash
 fix(auth): resolve login form validation issue
-docs: update installation instructions
-style: format code with prettier
+
+The form now properly validates email format before submission.
+
+Refs: #789
+```
+
+```bash
+docs(readme): update installation instructions
+
+Added step-by-step guide for setting up the development environment.
+```
+
+```bash
+style(ui): format code with prettier
+
+Applied consistent formatting across all component files.
+```
+
+```bash
 refactor(api): simplify user data fetching logic
+
+Removed redundant API calls and consolidated user data retrieval.
+
+Refs: #321
+```
+
+```bash
 test(auth): add unit tests for login component
+
+Created comprehensive test coverage for all login scenarios.
+
+Refs: #654
+```
+
+```bash
 chore(deps): update react to v18.3.0
+
+Upgraded React to latest stable version for security improvements.
+```
+
+```bash
+chore(config): add storybook setup
+
+Configured Storybook for component development and documentation.
+
+Refs: #1
+```
+
+```bash
 perf(ui): optimize image loading performance
-ci: add automated testing workflow
+
+Implemented lazy loading and WebP format for faster page loads.
+
+Refs: #987
+```
+
+```bash
+ci(github): add automated testing workflow
+
+Set up GitHub Actions for continuous integration testing.
 ```
 
 ### Bad Commit Messages
@@ -65,17 +166,45 @@ ci: add automated testing workflow
 # ❌ No type
 Update README
 
+# ❌ No scope
+feat: add user authentication
+
+# ❌ No body
+feat(auth): add user authentication system
+
 # ❌ Wrong case
 Fix: button styling issue
 
 # ❌ Too vague
-feat: add stuff
+feat(ui): add stuff
 
 # ❌ Too long (over 72 characters)
-feat: add a really comprehensive user authentication system with login, logout, password reset, email verification, and session management
+feat(auth): add a really comprehensive user authentication system with login, logout, password reset, email verification, and session management
 
 # ❌ Wrong format
 Added new feature for users
+
+# ❌ Body with bullet points (should be single sentence)
+feat(ui): implement navigation component
+
+- Added responsive design
+- Implemented dropdown menus
+- Added accessibility features
+
+# ❌ Body with multiple sentences (should be single sentence)
+feat(auth): add login functionality
+
+This adds login functionality. It also includes validation. The UI is responsive too.
+
+# ❌ Inconsistent type (on branch feat/123/user-auth but using chore: type)
+chore(auth): add user authentication system
+
+The system now supports JWT tokens for secure authentication.
+
+# ❌ Inconsistent type (on branch fix/456/login-bug but using feat: type)
+feat(auth): resolve login form validation issue
+
+Fixed the email validation to work properly with all formats.
 ```
 
 ## Message Guidelines
@@ -87,18 +216,36 @@ Added new feature for users
 - **Tense**: Use imperative mood ("add" not "added" or "adds")
 - **Punctuation**: No period at the end
 
-### Body (Optional)
+### Body (Required)
 
-- Use when you need to explain **what** and **why**
-- Wrap at 72 characters
-- Separate from subject with a blank line
-- Use bullet points if needed
+- **Required**: Every commit must include a body explaining the change
+- **Format**: Must be a single, simple sentence
+- **Content**: Explain **what** and **why** the change was made
+- **Length**: Wrap at 72 characters
+- **Separation**: Must be separated from subject with a blank line
+- **Restrictions**:
+  - No bullet points
+  - No lists
+  - No multiple sentences
+  - No complex formatting
 
 ### Footer (Optional)
 
-- Reference issues: `Closes #123`
-- Breaking changes: `BREAKING CHANGE: description`
-- Co-authors: `Co-authored-by: Name <email>`
+- **GitHub Issues**: Reference the issue number from your branch name using `Refs: #<issue-number>`
+  - If your branch is `feat/123/user-auth`, include `Refs: #123`
+  - If your branch is `chore/1/storybook`, include `Refs: #1`
+- **Closing Issues**: `Closes #123` (when the commit resolves the issue)
+- **Breaking Changes**: `BREAKING CHANGE: description`
+- **Co-authors**: `Co-authored-by: Name <email>`
+
+### Branch-to-Commit Reference Examples
+
+| Branch Name                    | Commit Type Required | Commit Message Footer |
+| ------------------------------ | -------------------- | --------------------- |
+| `feat/123/user-authentication` | `feat:`              | `Refs: #123`          |
+| `fix/456/login-validation`     | `fix:`               | `Refs: #456`          |
+| `chore/1/storybook`            | `chore:`             | `Refs: #1`            |
+| `docs/789/api-documentation`   | `docs:`              | `Refs: #789`          |
 
 ## Automated Enforcement
 
@@ -111,7 +258,14 @@ The project uses:
 ## Workflow
 
 1. **Stage your changes**: `git add .`
-2. **Commit with proper message**: `git commit -m "feat: add user dashboard"`
+2. **Commit with proper message**:
+
+   ```bash
+   git commit -m "feat(ui): add user dashboard
+
+   This creates a responsive dashboard for user account management."
+   ```
+
 3. **Hooks run automatically**:
    - ESLint fixes code issues
    - Prettier formats code
@@ -126,6 +280,8 @@ The project uses:
 - **Write descriptive messages**: Others should understand the change without looking at code
 - **Use present tense**: "add feature" not "added feature"
 - **Reference issues**: Link commits to GitHub issues when relevant
+- **Match branch type**: When on `feat/123/feature` branch, use `feat:` commit type
+- **Use branch naming convention**: Extract issue number from branch name (e.g., `feat/123/feature` → `Refs: #123`)
 - **Break down large changes**: Multiple small commits are better than one large commit
 
 ## Emergency Bypass
@@ -133,7 +289,9 @@ The project uses:
 In rare cases, you can bypass hooks with:
 
 ```bash
-git commit --no-verify -m "emergency fix"
+git commit --no-verify -m "fix(critical): resolve production server crash
+
+Emergency fix for memory leak causing server instability."
 ```
 
 **Use sparingly** - this skips all quality checks!
