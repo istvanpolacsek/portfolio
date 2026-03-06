@@ -27,3 +27,11 @@ yarn-debug.log*
 
 # Environment variables
 .env*
+
+# Storybook related files
+storybook-static
+debug-storybook.log
+
+# Next.js
+.next
+out
