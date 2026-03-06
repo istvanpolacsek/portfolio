@@ -16,8 +16,8 @@ This project uses **Conventional Commits** enforced by commitlint. All commit me
 
 - **Type**: Must be one of the defined commit types
 - **Scope**: Must specify the area of change (cannot be omitted)
-- **Body**: Must be a single, simple sentence explaining the change
-- **Footer**: Optional for GitHub issue references and other metadata
+- **Body**: Must be a single, simple sentence explaining the change (maximum 100 characters)
+- **Footer**: Required when working on numbered branches (e.g., `feat/123/feature`), optional otherwise
 
 ## Commit Types
 
@@ -70,11 +70,13 @@ Use the following branch naming pattern for automatic GitHub issue referencing:
 - `chore/1/storybook` → Commits must use `chore:` type
 - `docs/789/api-documentation` → Commits must use `docs:` type
 
-When working on a branch following this convention, include the issue number in your commit footer:
+When working on a branch following this convention, you **MUST** include the issue number in your commit footer:
 
 ```
 Refs: #123
 ```
+
+**This is required for all numbered branches - failure to include the Refs footer will cause commit validation to fail.**
 
 ## Examples
 
@@ -205,6 +207,26 @@ The system now supports JWT tokens for secure authentication.
 feat(auth): resolve login form validation issue
 
 Fixed the email validation to work properly with all formats.
+
+# ❌ Body too long (over 100 characters)
+feat(auth): add user authentication system
+
+This implements a comprehensive user authentication system with JWT tokens, login, logout, password reset functionality, email verification, session management, and role-based access control.
+
+# ❌ Missing required Refs footer on numbered branch feat/123/feature
+feat(auth): add user authentication system
+
+This implements JWT-based authentication with login and logout functionality.
+
+# ❌ Body exactly at limit but poor quality (should be descriptive within 100 chars)
+feat(ui): implement component
+
+This adds some stuff to make things work better and improves the overall user experience somehow.
+
+# ❌ Body over 100 characters with multiple clauses
+fix(api): resolve data fetching issue
+
+This fixes the API endpoint that was failing intermittently and also improves error handling for better user experience.
 ```
 
 ## Message Guidelines
@@ -221,7 +243,7 @@ Fixed the email validation to work properly with all formats.
 - **Required**: Every commit must include a body explaining the change
 - **Format**: Must be a single, simple sentence
 - **Content**: Explain **what** and **why** the change was made
-- **Length**: Wrap at 72 characters
+- **Length**: Maximum 100 characters (wrap at 72 characters for readability)
 - **Separation**: Must be separated from subject with a blank line
 - **Restrictions**:
   - No bullet points
@@ -232,8 +254,9 @@ Fixed the email validation to work properly with all formats.
 ### Footer (Optional)
 
 - **GitHub Issues**: Reference the issue number from your branch name using `Refs: #<issue-number>`
-  - If your branch is `feat/123/user-auth`, include `Refs: #123`
-  - If your branch is `chore/1/storybook`, include `Refs: #1`
+  - **MANDATORY** for numbered branches: If your branch is `feat/123/user-auth`, you **MUST** include `Refs: #123`
+  - **MANDATORY** for numbered branches: If your branch is `chore/1/storybook`, you **MUST** include `Refs: #1`
+  - Failure to include this footer on numbered branches will cause commit validation to fail
 - **Closing Issues**: `Closes #123` (when the commit resolves the issue)
 - **Breaking Changes**: `BREAKING CHANGE: description`
 - **Co-authors**: `Co-authored-by: Name <email>`
