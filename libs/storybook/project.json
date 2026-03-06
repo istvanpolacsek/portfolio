@@ -1,0 +1,9 @@
+{
+  "name": "Storybook Host",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/storybook/src",
+  "projectType": "library",
+  "tags": ["type:storybook"],
+  "// targets": "to see all targets run: nx show project Storybook Host --web",
+  "targets": {}
+}
