@@ -2,3 +2,6 @@ node_modules
 .nx
 .idea
 .env*
+tmp
+dist
+.vscode
