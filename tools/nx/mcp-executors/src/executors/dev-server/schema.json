@@ -1,34 +1,18 @@
 {
   "$schema": "http://json-schema.org/schema",
   "title": "Dev Server Executor",
-  "description": "Runs MCP server in development mode with hot-reload",
+  "description": "Launches the MCP Inspector web app against a built MCP server binary",
   "type": "object",
   "properties": {
-    "main": {
+    "serverScript": {
       "type": "string",
-      "description": "Entry point file",
-      "default": "src/main.ts"
-    },
-    "watch": {
-      "type": "boolean",
-      "description": "Enable file watching and hot-reload",
-      "default": true
-    },
-    "port": {
-      "type": "number",
-      "description": "Port to run the server on (if applicable)",
-      "default": 3000
+      "description": "Path to the compiled server entry point, relative to the workspace root (e.g. dist/apps/tunes-mcp/main.js)"
     },
     "envFile": {
       "type": "string",
       "description": "Environment file to load",
       "default": ".env.local"
-    },
-    "inspect": {
-      "type": "boolean",
-      "description": "Enable Node debugging",
-      "default": false
     }
   },
-  "required": ["main"]
+  "required": ["serverScript"]
 }

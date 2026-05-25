@@ -73,11 +73,12 @@
       }
     },
     "dev-server": {
-      "executor": "@nx/js:node",
+      "executor": "@portfolio/nx-mcp-executors:dev-server",
+      "continuous": true,
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "tunes-mcp:build",
-        "runBuildTargetDependencies": false
+        "serverScript": "dist/apps/tunes-mcp/main.js",
+        "envFile": "apps/tunes-mcp/.env.local"
       }
     },
     "prune-lockfile": {
