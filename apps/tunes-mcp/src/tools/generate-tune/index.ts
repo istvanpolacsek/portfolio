@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import {
   AERO_OPTIONS,
   anthropic,
@@ -10,7 +11,7 @@ import {
 } from '../../lib';
 import { TUNE_SYSTEM_PROMPT } from '../../prompts';
 
-export const generateTuneSchema = z.object({
+const generateTuneSchema = z.object({
   vehicle: z.string().describe('Full vehicle name, e.g. 2003 Ferrari Enzo'),
   game: z.enum(GAMES).describe('Forza game title'),
   cls: z.enum(CLASSES).describe('Performance class'),
@@ -28,9 +29,7 @@ export const generateTuneSchema = z.object({
 
 export type GenerateTuneParams = z.infer<typeof generateTuneSchema>;
 
-export async function generateTune(
-  params: GenerateTuneParams,
-): Promise<string> {
+async function generateTune(params: GenerateTuneParams): Promise<string> {
   const {
     vehicle,
     game,
@@ -55,10 +54,17 @@ export async function generateTune(
     .filter(Boolean)
     .join('\n');
 
-  const response = await anthropic.messages.create({
+  const response = await anthropic.beta.messages.create({
     model: 'claude-sonnet-4-5',
     max_tokens: 1000,
-    system: TUNE_SYSTEM_PROMPT,
+    betas: ['prompt-caching-2024-07-31'],
+    system: [
+      {
+        type: 'text',
+        text: TUNE_SYSTEM_PROMPT,
+        cache_control: { type: 'ephemeral' },
+      },
+    ],
     messages: [{ role: 'user', content: userMessage }],
   });
 
@@ -67,4 +73,21 @@ export async function generateTune(
     .join('');
 
   return text;
+}
+
+export function registerGenerateTuneTool(server: McpServer): void {
+  server.registerTool(
+    'generate_tune',
+    {
+      description:
+        'Generate a structured Forza tuning sheet for a given vehicle, class, and tuning type',
+      inputSchema: generateTuneSchema.shape,
+    },
+    async (params) => {
+      const result = await generateTune(params);
+      return {
+        content: [{ type: 'text', text: result }],
+      };
+    },
+  );
 }
