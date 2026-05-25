@@ -19,7 +19,10 @@ interface ToolDefinition {
   inputSchema: object;
 }
 
-function validateToolSchema(tool: ToolDefinition, filePath: string): { valid: boolean; errors: string[] } {
+function validateToolSchema(
+  tool: ToolDefinition,
+  filePath: string,
+): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
   if (!tool.name || typeof tool.name !== 'string') {
@@ -35,7 +38,9 @@ function validateToolSchema(tool: ToolDefinition, filePath: string): { valid: bo
   } else {
     // Validate it's a valid JSON schema
     if (!('type' in tool.inputSchema) && !('$ref' in tool.inputSchema)) {
-      errors.push(`Tool inputSchema should have 'type' or '$ref' field in ${filePath}`);
+      errors.push(
+        `Tool inputSchema should have 'type' or '$ref' field in ${filePath}`,
+      );
     }
   }
 
@@ -47,34 +52,44 @@ function validateToolSchema(tool: ToolDefinition, filePath: string): { valid: bo
 
 function findToolDefinitions(dir: string): Map<string, ToolDefinition> {
   const tools = new Map<string, ToolDefinition>();
-  
+
   function traverse(currentPath: string) {
     try {
       const entries = readdirSync(currentPath);
-      
+
       for (const entry of entries) {
         const fullPath = join(currentPath, entry);
         const stat = statSync(fullPath);
-        
+
         if (stat.isDirectory() && !entry.startsWith('.')) {
           traverse(fullPath);
-        } else if (stat.isFile() && (extname(entry) === '.ts' || extname(entry) === '.js')) {
+        } else if (
+          stat.isFile() &&
+          (extname(entry) === '.ts' || extname(entry) === '.js')
+        ) {
           try {
             const content = readFileSync(fullPath, 'utf-8');
             // Simple heuristic: look for tool exports
-            if (content.includes('export') && (content.includes('Schema') || content.includes('description'))) {
-              tools.set(fullPath, { name: entry, description: '', inputSchema: {} });
+            if (
+              content.includes('export') &&
+              (content.includes('Schema') || content.includes('description'))
+            ) {
+              tools.set(fullPath, {
+                name: entry,
+                description: '',
+                inputSchema: {},
+              });
             }
           } catch {
             // Skip files that can't be read
           }
         }
       }
-    } catch (error) {
+    } catch {
       // Skip directories that can't be read
     }
   }
-  
+
   traverse(dir);
   return tools;
 }
@@ -95,7 +110,7 @@ export default async function runExecutor(
 
     for (const [filePath, tool] of tools) {
       const validation = validateToolSchema(tool, filePath);
-      
+
       if (validation.valid) {
         logInfo(`✓ ${filePath}`);
         validCount++;
@@ -114,7 +129,9 @@ export default async function runExecutor(
 
     return { success: true };
   } catch (error) {
-    logError(`Failed to validate tools: ${error instanceof Error ? error.message : String(error)}`);
+    logError(
+      `Failed to validate tools: ${error instanceof Error ? error.message : String(error)}`,
+    );
     return { success: false };
   }
 }

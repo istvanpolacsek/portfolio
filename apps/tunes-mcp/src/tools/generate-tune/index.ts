@@ -68,11 +68,9 @@ async function generateTune(params: GenerateTuneParams): Promise<string> {
     messages: [{ role: 'user', content: userMessage }],
   });
 
-  const text = response.content
+  return response.content
     .map((block) => (block.type === 'text' ? block.text : ''))
     .join('');
-
-  return text;
 }
 
 export function registerGenerateTuneTool(server: McpServer): void {

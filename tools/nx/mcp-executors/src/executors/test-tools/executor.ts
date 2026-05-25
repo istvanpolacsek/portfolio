@@ -27,7 +27,9 @@ export default async function runExecutor(
 ): Promise<ExecutorResult> {
   const workspaceRoot = context.root;
   const toolsPath = join(workspaceRoot, options.toolsPath);
-  const testFixturesPath = options.testFixturesPath ? join(workspaceRoot, options.testFixturesPath) : null;
+  const testFixturesPath = options.testFixturesPath
+    ? join(workspaceRoot, options.testFixturesPath)
+    : null;
 
   logInfo(`Testing MCP tools in ${options.toolsPath}...`);
 
@@ -43,7 +45,11 @@ export default async function runExecutor(
 
     // Find all tool files
     const toolFiles = readdirSync(toolsPath)
-      .filter((f) => (extname(f) === '.ts' || extname(f) === '.js') && !f.endsWith('.spec.ts'))
+      .filter(
+        (f) =>
+          (extname(f) === '.ts' || extname(f) === '.js') &&
+          !f.endsWith('.spec.ts'),
+      )
       .map((f) => join(toolsPath, f));
 
     if (toolFiles.length === 0) {
@@ -72,14 +78,19 @@ export default async function runExecutor(
 
         // If test fixtures exist, run them
         if (testFixturesPath && existsSync(testFixturesPath)) {
-          const fixtureFile = join(testFixturesPath, `${toolName.name || 'test'}.json`);
+          const fixtureFile = join(
+            testFixturesPath,
+            `${toolName.name || 'test'}.json`,
+          );
           if (existsSync(fixtureFile)) {
             try {
-              const fixtures = JSON.parse(readFileSync(fixtureFile, 'utf-8'));
+              JSON.parse(readFileSync(fixtureFile, 'utf-8'));
               logInfo(`✓ ${toolFile}: Test fixtures loaded`);
               testResult.passed++;
             } catch (error) {
-              testResult.errors.push(`Failed to load fixtures: ${error instanceof Error ? error.message : String(error)}`);
+              testResult.errors.push(
+                `Failed to load fixtures: ${error instanceof Error ? error.message : String(error)}`,
+              );
               testResult.failed++;
               if (options.bail) {
                 return { success: false };
@@ -92,7 +103,9 @@ export default async function runExecutor(
         totalPassed += testResult.passed;
         totalFailed += testResult.failed;
       } catch (error) {
-        logError(`Failed to test ${toolFile}: ${error instanceof Error ? error.message : String(error)}`);
+        logError(
+          `Failed to test ${toolFile}: ${error instanceof Error ? error.message : String(error)}`,
+        );
         totalFailed++;
         if (options.bail) {
           return { success: false };
@@ -104,7 +117,9 @@ export default async function runExecutor(
 
     return { success: totalFailed === 0 };
   } catch (error) {
-    logError(`Test tools executor failed: ${error instanceof Error ? error.message : String(error)}`);
+    logError(
+      `Test tools executor failed: ${error instanceof Error ? error.message : String(error)}`,
+    );
     return { success: false };
   }
 }
