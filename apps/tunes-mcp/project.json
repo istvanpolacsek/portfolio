@@ -13,7 +13,7 @@
         "platform": "node",
         "outputPath": "dist/apps/tunes-mcp",
         "format": ["cjs"],
-        "bundle": false,
+        "bundle": true,
         "main": "apps/tunes-mcp/src/main.ts",
         "tsConfig": "apps/tunes-mcp/tsconfig.app.json",
         "assets": ["apps/tunes-mcp/src/assets"],
@@ -22,7 +22,8 @@
           "sourcemap": true,
           "outExtension": {
             ".js": ".js"
-          }
+          },
+          "external": []
         }
       },
       "configurations": {
@@ -35,6 +36,48 @@
             }
           }
         }
+      }
+    },
+    "validate-tools": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Validating tools in tunes-mcp...'",
+        "parallel": false
+      }
+    },
+    "validate-schema": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Validating schemas in tunes-mcp...'",
+        "parallel": false
+      }
+    },
+    "test-tools": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'Testing tools in tunes-mcp...'",
+        "parallel": false
+      }
+    },
+    "build-server": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/tunes-mcp",
+        "platform": "node",
+        "main": "apps/tunes-mcp/src/main.ts",
+        "tsConfig": "apps/tunes-mcp/tsconfig.app.json",
+        "sourcemap": true,
+        "assets": ["apps/tunes-mcp/src/assets"],
+        "generatePackageJson": true
+      }
+    },
+    "dev-server": {
+      "executor": "@nx/js:node",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "tunes-mcp:build",
+        "runBuildTargetDependencies": false
       }
     },
     "prune-lockfile": {
