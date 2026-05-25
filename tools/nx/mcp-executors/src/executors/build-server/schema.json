@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Build MCP Server Executor",
+  "description": "Builds an MCP server with esbuild and MCP-specific defaults",
+  "type": "object",
+  "properties": {
+    "outputPath": {
+      "type": "string",
+      "description": "Output directory for build artifacts",
+      "default": "dist"
+    },
+    "main": {
+      "type": "string",
+      "description": "Entry point file",
+      "default": "src/main.ts"
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "TypeScript configuration file",
+      "default": "tsconfig.json"
+    },
+    "sourcemap": {
+      "type": "boolean",
+      "description": "Generate sourcemaps",
+      "default": true
+    },
+    "bundle": {
+      "type": "boolean",
+      "description": "Bundle dependencies into output",
+      "default": true
+    },
+    "assets": {
+      "type": "array",
+      "description": "Assets to copy",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["outputPath", "main", "tsConfig"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Validate JSON Schema",
+  "implementation": "./executor.ts",
+  "schema": "./schema.json",
+  "description": "Validates JSON schema compliance for MCP tool inputs"
+}

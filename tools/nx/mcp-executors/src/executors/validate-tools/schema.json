@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Validate Tools Executor",
+  "description": "Validates MCP tool definitions and schemas are correctly structured",
+  "type": "object",
+  "properties": {
+    "toolsPath": {
+      "type": "string",
+      "description": "Path to the tools directory or file to validate",
+      "default": "src/tools"
+    },
+    "strict": {
+      "type": "boolean",
+      "description": "Enable strict validation mode",
+      "default": false
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,29 @@
+{
+  "executors": {
+    "validate-tools": {
+      "implementation": "./src/executors/validate-tools/executor.ts",
+      "schema": "./src/executors/validate-tools/schema.json",
+      "description": "Validates MCP tool definitions and schemas"
+    },
+    "validate-schema": {
+      "implementation": "./src/executors/validate-schema/executor.ts",
+      "schema": "./src/executors/validate-schema/schema.json",
+      "description": "Validates JSON schema compliance"
+    },
+    "test-tools": {
+      "implementation": "./src/executors/test-tools/executor.ts",
+      "schema": "./src/executors/test-tools/schema.json",
+      "description": "Tests tool implementations"
+    },
+    "build-server": {
+      "implementation": "./src/executors/build-server/executor.ts",
+      "schema": "./src/executors/build-server/schema.json",
+      "description": "Builds an MCP server"
+    },
+    "dev-server": {
+      "implementation": "./src/executors/dev-server/executor.ts",
+      "schema": "./src/executors/dev-server/schema.json",
+      "description": "Runs MCP server in dev mode"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Test Tools Executor",
+  "description": "Runs tool implementations against test inputs",
+  "type": "object",
+  "properties": {
+    "toolsPath": {
+      "type": "string",
+      "description": "Path to the tools directory",
+      "default": "src/tools"
+    },
+    "testFixturesPath": {
+      "type": "string",
+      "description": "Path to test fixtures directory",
+      "default": null
+    },
+    "bail": {
+      "type": "boolean",
+      "description": "Stop on first test failure",
+      "default": true
+    }
+  },
+  "required": []
+}

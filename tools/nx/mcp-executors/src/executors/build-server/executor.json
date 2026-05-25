@@ -1,0 +1,6 @@
+{
+  "name": "Build MCP Server",
+  "implementation": "./executor.ts",
+  "schema": "./schema.json",
+  "description": "Builds an MCP server with esbuild and MCP-specific defaults"
+}

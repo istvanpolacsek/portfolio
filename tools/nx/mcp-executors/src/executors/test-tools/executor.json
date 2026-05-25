@@ -1,0 +1,6 @@
+{
+  "name": "Test MCP Tools",
+  "implementation": "./executor.ts",
+  "schema": "./schema.json",
+  "description": "Runs tool implementations against test inputs"
+}

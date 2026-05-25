@@ -1,0 +1,15 @@
+{
+  "name": "@portfolio/nx-mcp-executors",
+  "version": "1.0.0",
+  "description": "Custom NX executors for MCP server projects",
+  "main": "dist/index.js",
+  "exports": {
+    "./validate-tools": "./dist/executors/validate-tools/executor.js",
+    "./validate-schema": "./dist/executors/validate-schema/executor.js",
+    "./test-tools": "./dist/executors/test-tools/executor.js",
+    "./build-server": "./dist/executors/build-server/executor.js",
+    "./dev-server": "./dist/executors/dev-server/executor.js"
+  },
+  "type": "module",
+  "files": ["dist", "executors"]
+}

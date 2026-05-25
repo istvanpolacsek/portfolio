@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Validate Schema Executor",
+  "description": "Validates JSON schema compliance for MCP tool inputs",
+  "type": "object",
+  "properties": {
+    "schemaPath": {
+      "type": "string",
+      "description": "Path to JSON schema file to validate",
+      "default": "src/schemas"
+    },
+    "testDataPath": {
+      "type": "string",
+      "description": "Path to test data files for schema validation",
+      "default": null
+    }
+  },
+  "required": []
+}

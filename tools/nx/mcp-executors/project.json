@@ -1,0 +1,45 @@
+{
+  "name": "nx-mcp-executors",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "tools/nx/mcp-executors/src",
+  "prefix": "portfolio",
+  "tags": ["tools:executors", "scope:mcp"],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/tools/nx/mcp-executors",
+        "main": "tools/nx/mcp-executors/src/index.ts",
+        "tsConfig": "tools/nx/mcp-executors/tsconfig.json",
+        "assets": [
+          "tools/nx/mcp-executors/src/executors/**/*.json"
+        ],
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false
+          }
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "tools/nx/mcp-executors/**/*.ts"
+        ]
+      }
+    }
+  }
+}

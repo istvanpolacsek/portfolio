@@ -1,0 +1,6 @@
+{
+  "name": "Validate MCP Tools",
+  "implementation": "./executor.ts",
+  "schema": "./schema.json",
+  "description": "Validates MCP tool definitions and schemas are correctly structured"
+}
